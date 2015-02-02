@@ -1,0 +1,69 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block meta_title%}Вопросы и ответы{% endblock meta_title%}
+
+{% block content%}
+
+    <p class="lead"><mark>{{ question }}</mark></p>
+
+    {% if answers %}
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th>Автор</th>
+              <th>Ответ</th>
+              {% if g.user.is_authenticated() %}
+                <th>Понравился Вам ответ?</th>
+              {% endif %}
+            </tr>
+          </thead>
+
+          <tbody>
+            {{ form.csrf_token }}
+            {% for answer in answers %}
+              <tr>
+                <td>
+                  {{ answer.autor }}
+                </td>
+                <td>
+                  {{ answer.body }}
+                </td>
+                {% if g.user.is_authenticated() %}
+                  {% if answer.estimate %}
+                    <td class="like-box">
+                        <input type="checkbox" value="1"
+                          data-url="{{ url_for('send_ajax') }}"
+                          data-question="{{ question }}"
+                          data-answer-id="{{ answer.id }}"
+                          checked="checked" /> Не нравится
+                    </td>
+                  {% else %}
+                    <td class="like-box">
+                        <input type="checkbox" value="1"
+                          data-url="{{ url_for('send_ajax') }}"
+                          data-question="{{ question }}"
+                          data-answer-id="{{ answer.id }}" /> Нравится
+                    </td>
+                  {% endif %}
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>На данный вопрос ответов еще нет.</p>
+      {% endif %}
+
+    {% if g.user.is_authenticated() %}
+      <form action="/qa" method="post" name="ask_q">
+        {{ form.hidden_tag() }}
+        <p>
+            Напишите ответ:<br>
+            {{ form.body(size=512) }}<br>
+        </p>
+        <p><input type="submit" value="Отправить"></p>
+      </form>
+    {% endif %}
+
+{% endblock %}

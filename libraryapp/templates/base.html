@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+
+  <head>
+    <meta charset="utf-8"/>
+    <title>Библиотека - {% block meta_title %}{% endblock meta_title %}</title>
+
+    <!-- Include styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/main.css"/>
+  </head>
+
+
+  <body>
+
+    <!-- Start Container -->
+    <div class="container">
+
+      <!-- Start Header -->
+      <div class="row" id="header">
+
+        <!-- Logo -->
+        <div class="col-xs-8">
+          <h1>Библиотека</h1>
+        </div>
+        <!-- End Logo -->
+
+        <!-- Start registration or authorization selector -->
+        <div class="col-xs-4">
+          {% if g.user.is_authenticated() %}
+            <p id="user-registr">
+              <mark><span class="glyphicon glyphicon-user" aria-hidden="true">  {{ g.user.nickname }}</span></mark>
+              <a class="btn btn-link" id="btn-exit" href="{{ url_for('logout') }}"> Выйти</a>
+            </p>
+          {% else %}
+            <a class="btn btn-primary" id="btn-authorization" href="{{ url_for('login') }}">Войти</a>
+            <a class="btn btn-link" id="btn-registration" href="{{ url_for('register') }}">Зарегистрироваться</a>
+          {% endif %}
+        </div>
+        <!-- End registration or authorization selector -->
+
+      </div>
+      <!-- End Header -->
+
+
+      <!-- Start SubHeader -->
+        <div class="row" id="sub-header">
+            <div class="col-xs-12">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" {% if session.page == 'index' %}class="active"{% endif %}>
+                        <a href="{{ url_for('index') }}">Главная</a>
+                    </li>
+                    {% if g.user.is_authenticated() %}
+                      <li role="presentation" {% if session.page == 'ask_question' %}class="active"{% endif %}>
+                          <a href="{{ url_for('ask_question') }}">Задать вопрос</a>
+                      </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <!-- End SubHeader -->
+
+        <!-- Start Status Message -->
+        {% include 'flash.html' %} 
+        <!-- End Status Message -->
+
+      <!-- Start Main Page Content -->
+      <div class="row" id="content-columns">
+        <div class="col-xs-12">
+          {% block content %}{% endblock content %}
+        </div>
+      </div>
+      <!-- End Main Page Content -->
+
+      <!-- Start Footer -->
+      <div class="row" id="footer">
+        <div class="col-xs-12">
+          &copy; 2015 Григорий Царик
+        </div>
+      </div>
+      <!-- End Footer -->
+
+    </div>
+    <!-- End Container -->
+
+    <!-- Javascripts Inclusion -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    {#  <script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap5.min.js"> </script> #}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"> </script>
+    <script src="/static/js/main.js"></script>
+
+  </body>
+  
+
+</html>

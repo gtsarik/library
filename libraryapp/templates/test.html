@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+<script src="http://malsup.github.com/jquery.form.js"></script> 
+<script type="text/javascript">
+$(document).ready(function(){ $('#output').ajaxForm({ dataType: 'json', success: GetResult }); });
+function GetResult(data){
+    console.log(data.result[0]);     // a = "12345"
+    console.log(data.result[1]);     // b = "abcde"
+};
+</script>
+</head>
+<body>
+    <form id="output" action="{{ url_for('test') }}" method="post">
+    <input type="submit" value="Отправить">
+    </form>
+</body>
+</html>

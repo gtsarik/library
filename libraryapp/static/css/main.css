@@ -1,0 +1,30 @@
+/* Global Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+/* Отступ информационной строки*/
+.alert,.lead {
+    margin-top: 10px;
+}
+
+/* Footer Styles */
+#footer {
+    /* верх элемента: ширина линии, тип линии, цвет линии */
+    border-top: 1px solid #dddddd;
+
+    /* внутренее растояние элемента до верхнего края */
+    padding-top: 10px;
+}
+
+/* Button registration or authorization selector */
+#btn-authorization, #btn-registration, #user-registr {
+    margin-top: 25px;
+}
+
+/* Form Styles */
+textarea, select, input {
+    max-width: 300px;
+}
+
+

@@ -1,0 +1,28 @@
+<!-- extend base layout -->l
+{% extends "base.html" %}
+
+{% block meta_title%}Главная{% endblock meta_title%}
+
+{% block content%}
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Автор</th>
+        <th>Вопрос</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for post in posts %}
+        <tr>
+          <td>
+            <p id="autor-fname">{{ post.autor }}</b></p>
+          </td>
+          <td>
+            <p><a id="autor-lname" href="/qa/{{ post.question }}">{{ post.question }}</p>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

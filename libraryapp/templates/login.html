@@ -1,0 +1,22 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block meta_title%}Авторизация{% endblock meta_title%}
+
+{% block content%}
+    <h3>{{ title }}</h3>
+    <form action="/login" method="post" name="login">
+        {{ form.hidden_tag() }}
+        
+        <p>
+            Введите свой логин:<br>
+            {{ form.login(size=80) }}<br>
+        </p>
+        <p>
+            Введите свой пароль:<br>
+            {{ form.password(size=80) }}<br>
+        </p>
+        <p>{{ form.remember_me }} запомнить меня</p>
+        <p><input type="submit" value="Войти"></p>
+    </form>
+{% endblock %}

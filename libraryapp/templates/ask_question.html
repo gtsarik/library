@@ -1,0 +1,17 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block meta_title%}Задать вопрос{% endblock meta_title%}
+
+{% block content%}
+    <h3>{{ title }}</h3>
+    <form action="/ask_question" method="post" name="ask_q">
+        {{ form.hidden_tag() }}
+        
+        <p>
+            Задайте свой вопрос:<br>
+            {{ form.question(size=128) }}<br>
+        </p>
+        <p><input type="submit" value="Отправить"></p>
+    </form>
+{% endblock %}
