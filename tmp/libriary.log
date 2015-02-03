@@ -1,2 +1,7 @@
 2015-02-03 16:00:42,779 INFO: microblog startup [in /data/work/virtualenvs/library/src/library/libraryapp/__init__.py:32]
 2015-02-03 16:01:04,085 INFO: libriary startup [in /data/work/virtualenvs/library/src/library/libraryapp/__init__.py:32]
+2015-02-03 16:10:55,976 INFO: libriary startup [in /data/work/virtualenvs/library/src/library/libraryapp/__init__.py:32]
+2015-02-03 16:11:03,195 INFO: libriary.log startup [in /data/work/virtualenvs/library/src/library/libraryapp/__init__.py:32]
+2015-02-03 16:24:52,511 INFO: libriary.log startup [in /home/library/library/libraryapp/__init__.py:32]
+2015-02-03 16:27:30,361 INFO: libriary.log startup [in /home/library/library/libraryapp/__init__.py:32]
+2015-02-03 16:28:34,465 INFO: libriary.log startup [in /home/library/library/libraryapp/__init__.py:32]
