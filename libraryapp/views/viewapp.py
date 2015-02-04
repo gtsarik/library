@@ -148,13 +148,17 @@ def ask_question():
     session['page'] = 'ask_question'
 
     if request.method == 'POST' and form.validate():
-        question = Question(title=form.question.data,
-                    date_post=now_datetime,
-                    id_user=id_user)
-        db.session.add(question)
-        db.session.commit()
-        flash(u'%s, Ваш вопрос отправлен' % g.user.nickname)
-        return redirect(url_for('index'))
+        if Question.query.filter_by(title=form.question.data).first() == None:
+            question = Question(title=form.question.data,
+                        date_post=now_datetime,
+                        id_user=id_user)
+            db.session.add(question)
+            db.session.commit()
+            flash(u'%s, Ваш вопрос отправлен' % g.user.nickname)
+            return redirect(url_for('index'))
+        else:
+            flash(u'Такой вопрос уже есть в списке вопросов. Задайте другой вопрос или смотрите ответы в разделе вопросов')
+            return redirect(url_for('ask_question'))
 
     return render_template('ask_question.html',
         title=u'Задать вопрос',
@@ -197,11 +201,15 @@ def register():
     form = RegistrationForm(request.form)
 
     if request.method == 'POST' and form.validate():
-        user = User(nickname=form.username.data,
-                    password=form.password.data,
-                    date_registration=now_datetime)
-        db.session.add(user)
-        db.session.commit()
-        flash(u'Спасибо за регистрацию')
-        return redirect(url_for('login'))
+        if User.query.filter_by(nickname=form.username.data).first() == None:
+            user = User(nickname=form.username.data,
+                        password=form.password.data,
+                        date_registration=now_datetime)
+            db.session.add(user)
+            db.session.commit()
+            flash(u'Спасибо за регистрацию')
+            return redirect(url_for('login'))
+        else:
+            flash(u'Пользователь с таким логином уже существует')
+            return redirect(url_for('register'))
     return render_template('register.html', form=form)
